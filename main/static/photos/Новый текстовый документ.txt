@@ -1,0 +1,3 @@
+<a href="{{% url 'shop:decrease' basket.id  product.product.id %}}"><button>-</button></a>
+            {{ product.quantity }}
+            <a href="{{% url 'shop:increase' basket.id  product.product.id %}}"><button>+</button></a>

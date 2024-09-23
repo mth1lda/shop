@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="header">
+    <img src="svg/logo.svg" alt="" class="header__img">
+    <div class="nav">
+        <a href="" class="nav__link">Каталог товаров</a>
+        <a href="" class="nav__link">Скидки</a>
+        <a href="" class="nav__link">Вопросы по заказам</a>
+    </div>
+    <input type="search" placeholder="Поиск товаров" class="header__search">
+    <div class="nav-icons">
+        <a href="{% url 'order_list' %}" class="nav-icon">
+            <img src="svg/icon-orders.svg" alt="" class="nav-icon__icon">
+            <p class="nav-icon__link">Заказы</p>
+        </a>
+        <a href="{% url 'cart' %}" class="nav-icon"></a>
+        <img src="svg/icon-orders.svg" alt="" class="nav-icon__icon">
+        <p class="nav-icon__link">Корзина</p>
+        </a>
+        <a href="{% url 'login' %}" class="nav-icon">
+            <img src="svg/icon-login.svg" alt="" class="nav-icon__icon">
+            <p class="nav-icon__link">Профиль</p>
+        </a>
+    </div>
+</div>
+{% if user.is_authenticated %}
+<a href="{% url 'logout' %}" class="link">logout</a>
+<div class="cards-wrapper">
+    {% for product in products %}
+    <div class="item">
+        <div class="info-container">
+            <img src="{{ product.image.url }}" alt="" class="item__img">
+            <div class="item-left-container">
+                <h2 class="item__title">{{ product.title }}</h2>
+                <p class="price__value">{{ product.price }}</p>
+                <div class="card-buttons">
+                    <div class="cb_btn">
+                        <a href="{% url 'add' product.id %}"></a>
+                    </div>
+                    <button class="card-buttons__button">Заказать</button>
+                    <button class="card-buttons__button">Подробнее</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<a href="{% url 'login' %}" class="link">Login</a>
+{% endif %}
+{% endblock %}
